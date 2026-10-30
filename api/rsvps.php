@@ -57,10 +57,10 @@ class DatabaseConfigurationException extends RuntimeException
 
 function sendConfirmationEmail(array $rsvp): void
 {
-    $fromAddress = environment('RSVP_FROM_ADDRESS', 'rsvp-tadiwa-elishama@adalacreations.com');
+    $fromAddress = environment('RSVP_FROM_ADDRESS', 'rsvp-tadiwa-elishama@adala-creations.com');
     $smtpUsername = environment('SMTP_USERNAME', $fromAddress);
     $smtpPassword = environment('SMTP_PASSWORD');
-    $smtpHost = environment('SMTP_HOST', 'mail.adalacreations.com');
+    $smtpHost = environment('SMTP_HOST', 'mail.adala-creations.com');
     $smtpPort = filter_var(environment('SMTP_PORT', '465'), FILTER_VALIDATE_INT);
     $smtpEncryption = strtolower(environment('SMTP_ENCRYPTION', 'ssl'));
 
@@ -99,16 +99,16 @@ function sendConfirmationEmail(array $rsvp): void
     $mailer->CharSet = PHPMailer\PHPMailer\PHPMailer::CHARSET_UTF8;
     $mailer->setFrom(
         $fromAddress,
-        environment('RSVP_FROM_NAME', 'RSVP T&E WEDDING')
+        'RSVP T&E WEDDING'
     );
     $mailer->addAddress($rsvp['email'], $rsvp['name']);
     $mailer->isHTML(true);
     if ($rsvp['attendance'] === 'Joyfully accept') {
         $mailer->Subject = "You're on the guest list! 🎉";
-        $message = "We're thrilled to confirm your RSVP for the wedding. We can't wait to celebrate this special day with you!";
+        $message = "We're thrilled to confirm your RSVP for the wedding of Tadiwanashe & Elishama. We can't wait to celebrate this special day with you!";
     } else {
         $mailer->Subject = 'RSVP Update Received';
-        $message = "Thank you for letting us know. We are sorry you won't be able to make it, but you will certainly be in our thoughts on the big day!";
+        $message = "Thank you for letting us know. We are sorry you won't be able to make it for the wedding of Tadiwanashe & Elishama, but you will certainly be in our thoughts on the big day!";
     }
 
     $mailer->Body = '<p>' . htmlspecialchars(
