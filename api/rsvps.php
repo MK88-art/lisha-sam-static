@@ -61,7 +61,6 @@ function sendConfirmationEmail(array $rsvp): void
     $smtpUsername = environment('SMTP_USERNAME', $fromAddress);
     $smtpPassword = environment('SMTP_PASSWORD');
     $smtpHost = environment('SMTP_HOST', 'mail.adala-creations.com');
-    $fromName = environment('RSVP_FROM_NAME', 'RSVP E&T WEDDING');
     $smtpPort = filter_var(environment('SMTP_PORT', '465'), FILTER_VALIDATE_INT);
     $smtpEncryption = strtolower(environment('SMTP_ENCRYPTION', 'ssl'));
 
@@ -100,7 +99,7 @@ function sendConfirmationEmail(array $rsvp): void
     $mailer->CharSet = PHPMailer\PHPMailer\PHPMailer::CHARSET_UTF8;
     $mailer->setFrom(
         $fromAddress,
-        $fromName
+        'RSVP T&E WEDDING'
     );
     $mailer->addAddress($rsvp['email'], $rsvp['name']);
     $mailer->isHTML(true);
